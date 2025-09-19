@@ -19,8 +19,6 @@ slides
 | out
 server
 ```
-```
-```
 
 The `slides` directory contains the source files for the slide deck presented at the meeting. The `server` directory corresponds with the files for the web server being fuzzed, written in Python for simplicity.
 
