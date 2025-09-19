@@ -1,4 +1,4 @@
-# LUG X WiCyS - Intro to Fuzzing
+# LUG X WiCyS - Intro to Web Security
 
 For our first Cybersecurity themed workshop for the WiCyS X LUG Cybersecurity collab weeks!
 
