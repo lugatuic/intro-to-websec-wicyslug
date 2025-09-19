@@ -1,0 +1,578 @@
+% "lugatuic" beamer theme
+% Fork of the Seville theme maintained by F. Muro
+% Initial editing and work done by Michael Khan
+%
+% Designed to provide a nice looking, consistent Beamer theme for lugatuic materials, as the name suggests.
+% You can use this theme as you wish, so long as you follow the rules of the original "Seville" theme license.
+%
+% VERSION: 1.0.1
+% 
+% Default Settings
+%   Colors: Gruvbox Dark Theme
+%   Font: Adobe Sans
+
+%% beamerthemeseville.sty
+%% Copyright 2022 F. Muro
+%
+% This work may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License, either version 1.3
+% of this license or (at your option) any later version.
+% The latest version of this license is in
+%   http://www.latex-project.org/lppl.txt
+% and version 1.3 or later is part of all distributions of LaTeX
+% version 2005/12/01 or later.
+%
+% This work has the LPPL maintenance status `maintained'.
+% 
+% The Current Maintainer of this work is F. Muro.
+%
+% This work consists of the file beamerthemeseville.sty.
+
+% --- Code Begins Below --- %
+
+\mode<presentation>
+
+% All these Fonts (should be) Open Source, so they're all acceptable!
+% Default Supported Fonts:
+% - Adobe Source Sans Pro & Source Code Pro Monospace (Default)
+% - Fira Sans by Firefox (Option = fira) 
+% - Noto Sans by Google (Option = noto)
+% - Alegreya Sans (Option = alegreya)
+% If you want to use a custom font to this stylesheet, please note them below.
+% Fonts added to this .sty file MUST be Open Source.
+
+% --- Option Declaration --- %
+
+% Fira Sans
+\newif\if@doFira
+\@doFirafalse
+\DeclareOptionBeamer{fira}{\@doFiratrue}
+\ProcessOptionsBeamer
+
+% Noto Sans
+\newif\if@doNoto
+\@doNotofalse
+\DeclareOptionBeamer{noto}{\@doNototrue}
+\ProcessOptionsBeamer
+
+% Alegreya Sans
+\newif\if@doAlegreya
+\@doAlegreyafalse
+\DeclareOptionBeamer{alegreya}{\@doAlegreyatrue}
+\ProcessOptionsBeamer
+
+% Academicons
+\newif\if@doAcademicons
+\@doAcademiconsfalse
+\DeclareOptionBeamer{academicons}{\@doAcademiconstrue}
+\ProcessOptionsBeamer
+
+% LuaLaTeX Support
+% TODO: Verify this works
+\newif\if@doLualatex
+\@doLualatexfalse
+\DeclareOptionBeamer{lualatex}{\@doLualatextrue}
+\ProcessOptionsBeamer
+
+% XeLaTeX Support
+% TODO: Verify
+\newif\if@doXelatex
+\@doXelatexfalse
+\DeclareOptionBeamer{xelatex}{\@doXelatextrue}
+\ProcessOptionsBeamer
+
+% Catpuccin Frappe Color Theme
+\newif\if@doCatFrap
+\@doCatFrapfalse
+\DeclareOptionBeamer{catfrap}{\@doCatFraptrue}
+\ProcessOptionsBeamer
+
+% --- Option Declaration Over --- %
+
+% --- Font Selection --- %
+
+% If Fira Sans was chosen, use it!
+\if@doFira
+  \RequirePackage{FiraSans}
+  \setmonofont{Fira Mono}[ Numbers = {Monospaced},
+    Scale=MatchUppercase]
+  \RequirePackage[fakebold]{firamath-otf}
+  \unimathsetup{mathrm=sym}
+  \setmathfont{Euler Math}[range={frak,cal}]
+  \setmathfont{XITS Math}[range={\bigcap,\bigcup,\bigoplus,\bigotimes,\vdots,\ddots}]
+  \setoperatorfont\mathsf
+  \renewcommand{\circ}{\mdsmwhtcircle}
+  \renewcommand{\bullet}{\mdsmblkcircle}
+\else
+% XeLaTeX support from Seville
+  \if@doXelatex
+    \RequirePackage{fontspec}
+    \setmainfont{Source Serif 4}
+    \setsansfont{Source Sans 3}
+    \setmonofont{Source Code Pro}
+    \RequirePackage{unicode-math}
+    \setmathfont{STIX Two Math}
+    \setmathfont[range=\mathup]  {Source Sans 3}
+    \setmathfont[range=\mathbfup]{Source Sans 3 Bold}
+    \setmathfont[range=\mathbfit]{Source Sans 3 Bold Italic}
+    \setmathfont[range=\mathit]  {Source Sans 3 Italic}
+    \setoperatorfont\mathsf
+  \else
+    % LuaLaTeX support from Seville
+    \if@doLualatex
+      \RequirePackage{fontspec}
+      \setmainfont{Source Serif Pro}
+      \setsansfont{Source Sans Pro}
+      \setmonofont{Source Code Pro}
+      \RequirePackage{unicode-math}
+      \setmathfont{STIX Two Math}
+      \setmathfont[range=\mathup]  {Source Sans Pro}
+      \setmathfont[range=\mathbfup]{Source Sans Pro Bold}
+      \setmathfont[range=\mathbfit]{Source Sans Pro Bold Italic}
+      \setmathfont[range=\mathit]  {Source Sans Pro Italic}
+      \setoperatorfont\mathsf
+    \else
+      % If chosen font is NOT Fira Sans & you are not using XeLaTeX o LuaLaTeX
+
+      % Noto Sans 
+      \if@doNoto
+        \RequirePackage[sfdefault,vvarbb]{notomath}
+        \RequirePackage[scale=\NotoText@scale]{noto-mono}
+      \else
+        % Alegreya Sans
+        \if@doAlegreya
+          \RequirePackage{AlegreyaSans}
+          \RequirePackage{eulervm}
+          \RequirePackage{bbold}
+          \RequirePackage[T1]{fontenc}
+          \RequirePackage{textcomp}
+          \RequirePackage[scaled=.83]{beramono}
+        \else
+          \RequirePackage[default]{sourcesanspro}
+          \RequirePackage{sourcecodepro}
+          \RequirePackage{eulervm}
+          \RequirePackage[T1]{fontenc}
+        \fi
+      \fi
+    \fi
+  \fi
+\fi
+
+% --- Font Selection Over --- %
+
+% --- Custom Icon Sets --- %
+
+% See icon options here: https://jpswalsh.github.io/academicons/
+%   Likely of note for LUG usage: ACM, StackOverflow, "closed-access", "open-access", piazza, overleaf
+\if@doAcademicons
+  \RequirePackage{academicons}
+\fi
+
+% --- Custom Icon Sets Over --- %
+
+% Use Font Awesome 5
+\RequirePackage{fontawesome5}
+
+% Support for basic programming within TeX packages
+% TODO: Verify neccessity
+\RequirePackage{etoolbox}
+% Makes tables look much nicer.
+\RequirePackage{booktabs}
+
+% --- Bibliography Templating --- %
+\setbeamertemplate{bibliography item}{\faBook}
+
+% Bibliography colors
+% TODO: Add these to demo for sensible colorpicking
+% TODO: Custom Color Stuff here
+\setbeamercolor{bibliography item}{fg=GruvDarkkgray}
+\setbeamercolor*{bibliography entry title}{fg=GruvDarkblack}
+\setbeamercolor*{bibliography entry author}{fg=GruvDarkblack}
+\setbeamercolor*{bibliography entry location}{fg=GruvDarkdarkgray}
+\setbeamercolor*{bibliography entry note}{fg=GruvDarkgray}
+
+\useinnertheme[titlepage=false]{tcolorbox}
+
+% --- Bibliography Templating Complete --- %
+
+% --- General Theme Settings Below! --- %
+
+\setbeamertemplate{navigation symbols}{}
+
+% --- Custom Color Declaration --- %
+
+% Using xcolor for color definition
+% Template:
+% \definecolor{ColorName}{RGB}{R,G,B}
+% NOTE: that RGB values must be between 0 and 255.
+% NOTE: the second argument "{RGB}" MUST be capitalized. "{rgb}" takes arguments between 0 and 1 for some reason. 
+
+% Recommended Colors:
+% - Default Background Color
+% - Focused Background Color
+% - Slide title bar color
+% - White
+% - Blue
+% - Red
+% - Green
+% - Purple
+% - Orange
+% - Yellow
+
+% GruvBox Dark Theme (Default)
+% https://github.com/morhetz/gruvbox?tab=readme-ov-file
+% Prefix: GruvDark
+
+\definecolor{GruvDarkbg}{RGB}{40,40,40}
+% Defined as "bg0_h" in above link
+\definecolor{GruvDarkblack}{RGB}{29,32,33}
+% Defined as "bg1"
+\definecolor{GruvDarkdarkgray}{RGB}{60,56,54}
+\definecolor{GruvDarkgray}{RGB}{146,131,116}
+% Defined as "fg0"
+\definecolor{GruvDarktext}{RGB}{251,241,199}
+\definecolor{GruvDarkblue}{RGB}{69,133,136}
+\definecolor{GruvDarkred}{RGB}{204,35,29}
+\definecolor{GruvDarkgreen}{RGB}{152,151,26}
+\definecolor{GurvDarkpurple}{RGB}{177,98,134}
+\definecolor{GruvDarkorange}{RGB}{254,128,25}
+\definecolor{GruvDarkyellow}{RGB}{250,189,47}
+
+% Catppuccin Frappe (cat-frappe)
+% https://catppuccin.com/palette
+% Prefix: CatFrap
+
+% "Crust"
+\definecolor{CatFrapbg}{RGB}{35,38,52}
+% "Mantle"
+\definecolor{CatFrapblack}{RGB}{41,44,60}
+% "Surface 0"
+\definecolor{CatFrapdarkgray}{RGB}{65,69,89}
+% "Overlay 0"
+\definecolor{CatFrapgray}{RGB}{115,121,148}
+% "Text"
+\definecolor{CatFraptext}{RGB}{198,208,245}
+\definecolor{CatFrapblue}{RGB}{140,170,238}
+\definecolor{CatFrapred}{RGB}{231,130,132}
+\definecolor{CatFrapgreen}{RGB}{166,209,137}
+% "Mauve"
+\definecolor{CatFrappurple}{RGB}{202,158,230}
+% "Peach"
+\definecolor{CatFraporange}{RGB}{239,159,118}
+\definecolor{CatFrapyellow}{RGB}{229,200,144}
+
+%  --- Custom Color Declaration End --- %
+
+% Background Color 
+\if@doCatFrap
+  \setbeamercolor{background canvas}{bg=CatFrapbg}
+  \else
+  \setbeamercolor{background canvas}{bg=GruvDarkbg}
+\fi
+
+% Title Text
+\if@doCatFrap
+  \setbeamercolor{title}{fg=CatFraptext}
+  \else
+  \setbeamercolor{title}{fg=GruvDarktext}
+\fi
+
+% Frame's title. bg determines color of bar, fg determines text color 
+\if@doCatFrap
+  \setbeamercolor*{frametitle}{bg=CatFrapdarkgray, fg=CatFraptext}
+  \else
+  \setbeamercolor*{frametitle}{bg=GruvDarkdarkgray, fg=GruvDarktext}
+\fi
+
+% Regular Text Color.fg determines text color.
+\if@doCatFrap
+  \setbeamercolor*{normal text}{fg=CatFraptext}
+  \else
+  \setbeamercolor*{normal text}{fg=GruvDarktext}
+\fi
+
+% Alerted text color
+\if@doCatFrap
+  \setbeamercolor*{alerted text}{fg=CatFrapred}
+  \else
+  \setbeamercolor*{alerted text}{fg=GruvDarkred}
+\fi
+
+% TODO: Check if this is redunant
+\setbeamercolor{part title}{fg=blue}
+\setbeamercolor{section title}{fg=blue}
+\setbeamercolor{subsection title}{fg=blue}
+% Block Enviroment Text Coloring.
+% {block title} manages the block title.
+% {block body} manages the block content text.
+% bg = the background color, which acts like a background highlight.
+% fg = the text color
+
+% Default Block
+\if@doCatFrap
+  \setbeamercolor{block title}{bg=CatFrapblack, fg=CatFrapblue}
+  \setbeamercolor{block body}{bg=CatFrapblack, fg=CatFraptext}
+  \else
+  \setbeamercolor{block title}{bg=GruvDarkblack, fg=GruvDarkblue}
+  \setbeamercolor{block body}{bg=GruvDarkblack, fg=GruvDarktext}
+\fi
+
+% Alerted Block
+\if@doCatFrap
+  \setbeamercolor{block title alerted}{bg=CatFrapblack, fg=CatFrapred}
+  \setbeamercolor{block body alerted}{bg=CatFrapblack, fg=CatFraptext}
+  \else
+  \setbeamercolor{block title alerted}{bg=GruvDarkblack, fg=GruvDarkred}
+  \setbeamercolor{block body alerted}{bg=GruvDarkblack, fg=GruvDarktext}
+\fi
+
+% Example Block
+\if@doCatFrap
+  \setbeamercolor{block title example}{bg=CatFrapblack, fg=CatFrapgreen}
+  \setbeamercolor{block body example}{bg=CatFrapblack, fg=CatFraptext}
+  \else
+  \setbeamercolor{block title example}{bg=GruvDarkblack, fg=GruvDarkgreen}
+  \setbeamercolor{block body example}{bg=GruvDarkblack, fg=GruvDarktext}
+\fi
+
+% Color of Enumerate Numbers & Itemize Bullets
+\if@doCatFrap
+  \setbeamercolor{enumerate item}{fg=CatFrapgray}
+  \setbeamercolor{enumerate subitem}{fg=CatFrapgray}
+  \setbeamercolor{enumerate subsubitem}{fg=CatFrapgray}
+  \setbeamercolor{itemize item}{fg=CatFrapgray}
+  \setbeamercolor{itemize subitem}{fg=CatFrapgray}
+  \setbeamercolor{itemize subsubitem}{fg=CatFrapgray}
+  \else
+  \setbeamercolor{enumerate item}{fg=GruvDarkgray}
+  \setbeamercolor{enumerate subitem}{fg=GruvDarkgray}
+  \setbeamercolor{enumerate subsubitem}{fg=GruvDarkgray}
+  \setbeamercolor{itemize item}{fg=GruvDarkgray}
+  \setbeamercolor{itemize subitem}{fg=GruvDarkgray}
+  \setbeamercolor{itemize subsubitem}{fg=GruvDarkgray}
+\fi
+
+\if@doCatFrap
+  \setbeamercolor{section number projected}{fg=CatFrapdarkgray}
+  % TOC Section Titles; fg = text color
+  \setbeamercolor{section in toc}{fg=CatFraptext}
+  \else
+  \setbeamercolor{section number projected}{fg=GruvDarkdarkgray}
+  % TOC Section Titles; fg = text color
+  \setbeamercolor{section in toc}{fg=GruvDarktext}
+\fi
+
+
+\setbeamertemplate{itemize item}{$\bullet$}
+\setbeamertemplate{itemize subitem}{$\circ$}
+\setbeamertemplate{itemize subsubitem}{-}
+\setbeamertemplate{enumerate subitem}{\alph{enumii}.}
+\setbeamertemplate{enumerate subsubitem}{\roman{enumiii}.}
+\setbeamertemplate{section in toc}[sections numbered]
+\setbeamertemplate{subsection in toc}[subsections numbered]
+\setbeamertemplate{subsubsection in toc}[subsubsections numbered]
+
+
+% Math-y Enviroments. It's extra work to remove support that *may* come in handy to someone.
+% It's also not that important to me to change. Feel free to change this if you care about these enviroments though :)
+% TODO: color enviroment option stuff here if someone cares
+\AtBeginEnvironment{theorem}{%
+  \setbeamercolor{block title}{fg=GruvDarkred}
+}
+\AtBeginEnvironment{lemma}{%
+  \setbeamercolor{block title}{fg=GruvDarkyellow}
+}
+\AtBeginEnvironment{corollary}{%
+  \setbeamercolor{block title}{fg=GruvDarkblue}
+}
+\AtBeginEnvironment{fact}{%
+  \setbeamercolor{block title}{fg=GruvDarkorange}
+}
+
+\AtBeginEnvironment{proof}{%
+  \setbeamercolor{block title}{fg=GruvDarkgray}
+}
+
+% QED Symbol Definition
+\renewcommand{\qedsymbol}{$\color{GruvDarkblack}{\blacksquare}$}
+
+\setlength{\parskip}{.5\baselineskip}
+
+% Boldface italic alterted text but not math
+\providecommand*{\beamer@alertedtext@only}{%
+  \relax
+  \ifmmode
+    \expandafter\beamer@alertedtext@warning
+  \else
+    \bfseries\itshape
+  \fi
+}
+\providecommand*{\beamer@alertedtext@warning}{%
+  \ClassWarning{beamer}
+  {Cannot use bold/italic for alerted text in math mode}%
+}
+
+
+% --- Special Case Font Manipulation --- %
+
+% Make the Frame Subtitle text small and italic
+\setbeamerfont*{framesubtitle}{series=\itshape\small}
+% Make the Title text large and bold
+\setbeamerfont*{title}{series=\bfseries, size=\Large}
+% Make the document Subtitle bold and italic
+\setbeamerfont*{subtitle}{series=\itshape}
+% Make the date italic
+\setbeamerfont*{date}{series=\itshape, size=\small}
+%  Make alerted text... alerted :)
+\setbeamerfont*{alerted text}{series=\beamer@alertedtext@only}
+% Make block title text italic (and enforce a normal size)
+\setbeamerfont*{block title}{series=\itshape\normalsize}
+% Make the beginning of a theorem "normal". Not touching math enviroments, so idk what this means.
+\addtobeamertemplate{theorem begin}{\normalfont}{}
+
+% --- End Font Manip --- %
+
+%\RequirePackage[most]{tcolorbox}
+
+% All Block Enviroments (Block, AlertBlock, ExampleBlock) are tcbboxes
+% If you want to edit this stuff, I'll save you a little time!
+% tcbox documentation: https://texdoc.org/serve/tcolorbox.pdf/0
+% If you're trying to look for a specific property (like size, colback, etc.) search for it like so:
+% /tcb/PROPERTYNAME
+
+% TODO: Fix padding/spacing bug between title & content of blocks
+
+\if@doCatFrap
+  \tcbsetforeverylayer{
+    fonttitle=\bfseries\itshape,
+    colback=CatFrapblack,
+    colframe=CatFrapblack,
+    size=fbox,
+    enhanced,
+    % Colored Bar at side of Block
+    borderline west = {2pt}{-2mm}{tcbcoltitle}
+  }
+  \else
+  \tcbsetforeverylayer{
+    fonttitle=\bfseries\itshape,
+    colback=GruvDarkblack,
+    colframe=GruvDarkblack,
+    size=fbox,
+    enhanced,
+    % Colored Bar at side of Block
+    borderline west = {2pt}{-2mm}{tcbcoltitle}
+  }
+\fi
+
+% Math enviroment stuff
+\NewDocumentEnvironment{proposition}{ o }{%
+  \setbeamercolor{block title}{fg=purple}
+  \begin{block}{Proposition \IfValueT{#1}{(#1)}}
+    }{%
+  \end{block}}
+\NewDocumentEnvironment{remark}{ o }{%
+  \setbeamercolor{block title}{fg=violet}
+  \begin{block}{Remark \IfValueT{#1}{(#1)}}
+    }{%
+  \end{block}}
+
+
+
+% External Link Formatting Code
+% Format: [ICON] [LINK] that is automatically generated from input info :)
+\NewDocumentCommand\email{ o m }{\newcommand\insertemail{\href{mailto:\IfValueTF{#1}{#1}{#2}}{\mbox{{\scriptsize\faEnvelope}\hspace{.5em}\scriptsize #2}}}}
+\NewDocumentCommand\site{ m }{\newcommand\insertsite{\href{https://#1}{\mbox{{\scriptsize\faHome}\hspace{.5em}\scriptsize #1}}}}
+\NewDocumentCommand\mathscinet{ m }{\newcommand\insertmathscinet{\href{#1}{\mbox{{\scriptsize\faUniversity}\hspace{.5em}\scriptsize MathSciNet}}}}
+\NewDocumentCommand\arxiv{ s m }{
+  \newcommand\insertarxiv{\href{\IfBooleanTF{#1}{https://arxiv.org/a/#2.html}{#2}}{\mbox{\scriptsize\aiarXiv}\hspace{.5em}\scriptsize \IfBooleanTF{#1}{#2}{arXiv}}}
+}
+\NewDocumentCommand\zotero{ m }{\newcommand\insertzotero{\href{#1}{\mbox{{\scriptsize\aiZoteroSquare}\hspace{.5em}\scriptsize Zotero}}}}
+\NewDocumentCommand\googlescholar{ m }{\newcommand\insertgooglescholar{\href{#1}{\mbox{{\scriptsize\aiGoogleScholar}\hspace{.5em}\scriptsize Google Scholar}}}}
+\NewDocumentCommand\orcid{ m }{\newcommand\insertorcid{\href{#1}{\mbox{{\scriptsize\aiOrcid}}\hspace{.5em}\scriptsize ORCID}}}
+\NewDocumentCommand\scopus{ m }{\newcommand\insertscopus{\href{#1}{\mbox{{\scriptsize\aiScopusSquare}\hspace{.5em}\scriptsize Scopus}}}}
+\NewDocumentCommand\facebook{ m }{\newcommand\insertfacebook{\href{#1}{\mbox{{\scriptsize\faFacebook}\hspace{.5em}\scriptsize Facebook}}}}
+\NewDocumentCommand\linkedin{ m }{\newcommand\insertlinkedin{\href{#1}{\mbox{{\scriptsize\faLinkedin}\hspace{.5em}\scriptsize Linkedin}}}}
+\NewDocumentCommand\github{ m }{\newcommand\insertgithub{\href{https://github.com/#1}{\mbox{{\scriptsize\faGithub}\hspace{.5em}\scriptsize #1}}}}
+\NewDocumentCommand\gitlab{ m }{\newcommand\insertgitlab{\href{https://gitlab.com/#1}{\mbox{{\scriptsize\faGitlab}\hspace{.5em}\scriptsize #1}}}}
+\NewDocumentCommand\twitter{ m }{\newcommand\inserttwitter{\href{https://x.com/#1}{\mbox{{\scriptsize\faTwitter}\hspace{.5em}\scriptsize @#1}}}}
+\NewDocumentCommand\instagram{ m }{\newcommand\insertinstagram{\href{https://www.instagram.com/#1}{\mbox{{\scriptsize\faInstagram}\hspace{.5em}\scriptsize #1}}}}
+
+% Title Page Template
+\defbeamertemplate*{title page}{}{
+  \vfill
+  \ifx\inserttitlegraphic\empty
+      {\usebeamerfont{title}{\usebeamercolor[fg]{title}{\inserttitle}}}\newline
+      {\usebeamerfont{subtitle}\insertsubtitle}\newline
+      {\usebeamerfont{date}\insertdate}\par
+      {\usebeamerfont{author}\insertauthor}\newline
+      {\usebeamerfont{institute}\insertinstitute}\par
+      {\@ifundefined{insertemail}{}{\insertemail\quad}
+        \@ifundefined{insertsite}{}{\insertsite\quad}
+        \@ifundefined{insertmathscinet}{}{\insertmathscinet\quad}
+        \@ifundefined{insertarxiv}{}{\insertarxiv\quad}
+        \@ifundefined{insertzotero}{}{\insertzotero\quad}
+        \@ifundefined{insertgooglescholar}{}{\insertgooglescholar\quad}
+        \@ifundefined{insertorcid}{}{\insertorcid\quad}
+        \@ifundefined{insertscopus}{}{\insertscopus\quad}
+        \@ifundefined{insertgithub}{}{\insertgithub\quad}
+        \@ifundefined{insertgitlab}{}{\insertgitlab\quad}
+        \@ifundefined{insertfacebook}{}{\insertfacebook\quad}
+        \@ifundefined{insertlinkedin}{}{\insertlinkedin\quad}
+        \@ifundefined{inserttwitter}{}{\inserttwitter\quad}
+        \@ifundefined{insertinstagram}{}{\insertinstagram\quad}
+      }
+  \else
+    \begin{columns}
+      \begin{column}{0.6\textwidth}
+        \begin{flushleft}
+        {\usebeamerfont{title}{\usebeamercolor[fg]{title}{\inserttitle}}}\par
+        {\usebeamerfont{subtitle}\insertsubtitle}\par
+        {\usebeamerfont{date}\insertdate}\par
+        \vspace{2mm}
+        {\usebeamerfont{author}\insertauthor}\par
+        {\usebeamerfont{institute}\insertinstitute}\par
+        {\@ifundefined{insertemail}{}{\insertemail\quad}
+          \@ifundefined{insertsite}{}{\insertsite\quad}
+          \@ifundefined{insertmathscinet}{}{\insertmathscinet\quad}
+          \@ifundefined{insertarxiv}{}{\insertarxiv\quad}
+          \@ifundefined{insertzotero}{}{\insertzotero\quad}
+          \@ifundefined{insertgooglescholar}{}{\insertgooglescholar\quad}
+          \@ifundefined{insertorcid}{}{\insertorcid\quad}
+          \@ifundefined{insertscopus}{}{\insertscopus\quad}
+          \@ifundefined{insertgithub}{}{\insertgithub\quad}
+          \@ifundefined{insertgitlab}{}{\insertgitlab\quad}
+          \@ifundefined{insertfacebook}{}{\insertfacebook\quad}
+          \@ifundefined{insertlinkedin}{}{\insertlinkedin\quad}
+          \@ifundefined{inserttwitter}{}{\inserttwitter\quad}
+          \@ifundefined{insertinstagram}{}{\insertinstagram\quad}
+        }
+        \end{flushleft}
+      \end{column}
+      \begin{column}{0.4\textwidth}
+        \begin{figure}
+          \centering
+          \inserttitlegraphic
+        \end{figure}
+      \end{column}
+    \end{columns}
+  \fi
+}
+
+\renewcommand<>\beamer@framefootnotetext[1]{%
+  \global\setbox\beamer@footins\vbox{%
+    \hsize\framewidth
+    \textwidth\hsize
+    \columnwidth\hsize
+    \unvbox\beamer@footins
+    \reset@font\footnotesize
+    \@parboxrestore
+    \protected@edef\@currentlabel
+    {\noindent\csname p@footnote\endcsname\@thefnmark}%
+    \hskip -1.5em
+    \color@begingroup
+    \uncover#2{\@makefntext{%
+        \rule\z@\footnotesep\ignorespaces\parbox[t]{.99\textwidth}{#1\@finalstrut\strutbox}\vskip1sp}}%
+    \color@endgroup}%
+}
+
+\mode<all>
