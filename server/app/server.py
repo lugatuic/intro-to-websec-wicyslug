@@ -3,6 +3,7 @@ import sqlite3
 
 app = Flask(__name__)
 
+
 @app.route('/')
 def home():
     return render_template("index.html")
@@ -10,14 +11,21 @@ def home():
 @app.route('/login', methods=["POST"])
 def login():
     username = request.form.get("username")
-    password = request.form.get("username")
+    password = request.form.get("password")
 
+    # Connect to database
+    dbConn = sqlite3.connect("app/users.db")
+    cursor = dbConn.cursor()
     # SQL Injection Vulnerability
-    # TODO: SQLite connection
+    query = f"SELECT * FROM users WHERE username = '{username}' AND password = '{password}'"
+    result = cursor.execute(query).fetchone()
 
-    response = make_response(redirect("/dashboard"))
-    response.set_cookie("session", username) # Insecure session management
-    return response
+    if result:
+        response = make_response(redirect("/dashboard"))
+        response.set_cookie("session", username)
+        return response
+    else:
+        return f"Invalid credentials. <a href='/'>Try again</a><br/><p>{query}</p>"
 
 @app.route("/dashboard")
 def dashboard():
