@@ -32,6 +32,14 @@ def dashboard():
     user = request.cookies.get("session")
     return render_template("dashboard.html", username=user)
 
+@app.route("/search", methods=["GET"])
+def search():
+    query = request.args.get("q", "")
+    # Reflective XSS vulnerability
+    # I mean awesome dynamic title generation that is totally safe :)
+    title = f"<title>{query}</title>"
+    return title + render_template("search.html", query=query)
+
 if __name__ == '__main__':
     # host = 0.0.0.0
     # "Bind to all interfaces"

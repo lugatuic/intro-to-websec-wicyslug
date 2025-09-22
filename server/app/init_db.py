@@ -1,9 +1,6 @@
 import sqlite3
 import random
 
-# 14344391
-
-
 if __name__ == '__main__':
     print("WARNING: This is slow and uneeded.","The Database has been initialized already." ,"Only run if you want to change what is in it.","This is just here for posterity.", sep='\n')
     f = open("rockyou.txt", "r", encoding="latin-1")
