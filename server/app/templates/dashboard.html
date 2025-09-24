@@ -5,5 +5,13 @@
   </head>
   <body>
     <p>Welcome, {{username}}!</p>
+    <form action="/post" method="POST">
+      <input type="text" id="post" size="100" style="height:200px;"><br/>
+      <button type="submit">Post</button>
+    </form>
+    <form action="/search" method="GET">
+    <input type="text" id="search" name="q">
+    <button type="submit">Search</button>
+    </form>
   </body>
 </html>
