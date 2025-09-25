@@ -6,11 +6,11 @@
   <body>
     <p>Welcome, {{username}}!</p>
     <form action="/post" method="POST">
-      <input type="text" id="post" size="100" style="height:200px;"><br/>
+      <input type="text" name="post" id="post" size="100"><br/>
       <button type="submit">Post</button>
     </form>
     <form action="/search" method="GET">
-    <input type="text" id="search" name="q">
+    <input type="text" id="search" name="username">
     <button type="submit">Search</button>
     </form>
   </body>

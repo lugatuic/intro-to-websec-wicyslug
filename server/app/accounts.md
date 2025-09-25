@@ -1,0 +1,21 @@
+FORMAT: user|password
+admin|password123
+ectoBiologist|karma245
+ghostyTrickster|c478v7255
+tentacleTherapist|191839
+turntechGodhead|wxrm243
+gardenGnostic|tonoak
+gutsyGumshoe|hottiesix
+golgothasTerror|i4gotpassword
+timaeusTestified|6248836
+tipsyGnostalgic|HolyOneJesus
+torvalds|CRISTY123
+tim_apple|PENNY123123123
+Xx_homersimpsongaming_xX|Anglekid7
+sayitaintso|chels-cbt
+bobbyburgers|hawg80
+purplehomer|k0r0n@
+greenhomer|mountpallas
+bluehomer|helloo69
+pinkhomer|doghouse456
+realadmintrust|rubencef
