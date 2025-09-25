@@ -145,6 +145,14 @@ def post():
     make_post(user, post)
     return make_response(redirect("/dashboard"))
 
+@app.route("/clear", methods=["POST"])
+def clear():
+    user = request.cookies.get("session")
+    if user == "admin":
+        for i in range(0, 10):
+            make_post(user, "HOMEPAGE CLEARED!")
+    return make_response(redirect("/dashboard"))
+
 
 if __name__ == '__main__':
     # host = 0.0.0.0

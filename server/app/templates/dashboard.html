@@ -18,5 +18,10 @@
     <form action="/search" method="GET">
       <button type="submit">Recent Posts</button>
     </form>
+    {% if username == "admin": %}
+    <form action="/clear" method="POST">
+      <button type="submit">Clear Posts</button>
+    </form>
+    {% endif %}
   </body>
 </html>
