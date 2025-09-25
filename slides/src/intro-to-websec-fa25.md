@@ -1,8 +1,8 @@
 ---
-title: Intro to Fuzzing w/ OWASP ZAP
+title: Intro to Web Security
 subtitle: LUG X WiCyS Cybersec Week 
 author: Michael Hanif Khan
-date: TODO
+date: 9/25/25
 ---
 
 # Slide 1

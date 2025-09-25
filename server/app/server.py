@@ -62,7 +62,7 @@ def build_post(user, post_raw):
     post = "<div class=\"post\">"
     # User Tag
     post += f"<b>@{user}</b><br>" 
-    post += f"POST: {post_raw}"
+    post += f"{post_raw}"
     post += "</div>"
     return post
 
@@ -70,12 +70,11 @@ def build_post(user, post_raw):
 # user, post
 def build_posts(posts_raw):
     posts = []
+    if posts_raw == None or len(posts_raw) == 0:
+        return None
     for post in posts_raw:
         posts.append(build_post(post[0], post[1]))
-    if len(posts) == 0:
-        return None
-    else:
-        return posts
+    return posts
 
 app = Flask(__name__)
 
@@ -112,6 +111,8 @@ def dashboard():
 def search():
     user = request.args.get('username')
     # Get all the posts into a list for awesome templating :)
+    if user == "":
+        user = "recent"
     posts_raw = get_posts(user)
     # if posts_raw == None:
     #     return render_template("search.html", username=user)
@@ -119,6 +120,8 @@ def search():
     #     if(request.cookies.get(f"post_{i}") != None):
     #        posts.append(request.cookies.get(f"post_{i}"))
     posts = build_posts(posts_raw)
+    if posts == None:
+        posts = []
     # Flask templating is actually intelligent and stops you from introducing XSS vulns. Time to completely undo their hard work :D
     # Idea is to pass each post's html through a list and building them ourselves so we don't sanitize input in the slightest :D
     

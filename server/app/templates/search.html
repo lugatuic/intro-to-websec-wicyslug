@@ -1,10 +1,36 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
+    <style>
+      ul {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        list-style-type: none;
+        margin-left: -2.5%;
+      }
+
+      ul li {
+        float: left;
+      }
+
+      ul li a{
+        padding: 14px 16px;
+      }
+    </style>
   </head>
   <body>
+    {% if username == "recent": %}
+    <h1>Recent Posts</h1>
+    {% else %}
     <h1>Recent Posts: @{{username}}</h1>
-    <p><a href="/dashboard">Return to Dashboard.</a></p>
+    {% endif %}
+    <ul>
+      <li><a href="/">Sign Out</a></li>
+      <li><a href="/dashboard">Return to Dashboard</a><li>
+    </ul>
+    <p style="padding-bottom: 1%"></p>
     {% if posts == None %}
       <p>No results found.</p>
     {% else %}
