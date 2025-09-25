@@ -15,6 +15,8 @@ def make_post(user, post):
     dbConn = sqlite3.connect(DATABASE)
     cursor = dbConn.cursor()
 
+    post = post.replace("'", "\"")
+
     register_SQL = "INSERT INTO postIDs VALUES (NULL, ?);"
 
     # Register post w/ postIDs table
@@ -111,7 +113,7 @@ def dashboard():
 def search():
     user = request.args.get('username')
     # Get all the posts into a list for awesome templating :)
-    if user == "":
+    if user == "" or user == None:
         user = "recent"
     posts_raw = get_posts(user)
     # if posts_raw == None:
@@ -139,6 +141,7 @@ def search():
 def post():
     user = request.cookies.get("session")
     post = request.form.get("post")
+    post.replace("'", "\"")
     make_post(user, post)
     return make_response(redirect("/dashboard"))
 
