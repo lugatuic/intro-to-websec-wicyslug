@@ -38,7 +38,7 @@ def get_posts(user):
 
     # We're already making things inesecure, so to get all recent posts, we can just:
     if user == "recent":
-        postID_SQL = "SELECT postID FROM postIDs ORDER BY postID DESC LIMIT 5;"
+        postID_SQL = "SELECT postID FROM postIDs ORDER BY postID DESC LIMIT 10;"
         result = cursor.execute(postID_SQL)
     # Select the 5 most recent postIDs from a given user.
     else:
